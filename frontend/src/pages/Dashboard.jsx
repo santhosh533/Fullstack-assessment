@@ -94,7 +94,7 @@ export default function Dashboard() {
                 <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
                   Document 1
                 </label>
-                <input type="file" accept=".pdf,.png,.jpg,.jpeg" required
+                <input type="file" accept=".pdf,.png,.jpg,.jpeg"
                   onChange={e => setFile1(e.target.files[0])}
                   style={{width:"100%", padding:"8px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"13px", boxSizing:"border-box"}} />
                 <p style={{fontSize:"11px", color:"#999", margin:"4px 0 0"}}>PDF, PNG, JPEG only</p>
@@ -104,7 +104,7 @@ export default function Dashboard() {
                 <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
                   Document 2
                 </label>
-                <input type="file" accept=".pdf,.png,.jpg,.jpeg" required
+                <input type="file" accept=".pdf,.png,.jpg,.jpeg"
                   onChange={e => setFile2(e.target.files[0])}
                   style={{width:"100%", padding:"8px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"13px", boxSizing:"border-box"}} />
                 <p style={{fontSize:"11px", color:"#999", margin:"4px 0 0"}}>PDF, PNG, JPEG only</p>
