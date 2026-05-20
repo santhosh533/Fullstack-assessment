@@ -7,6 +7,7 @@ export default function Dashboard() {
   const [file2, setFile2] = useState(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const userName = localStorage.getItem("user_name");
@@ -14,88 +15,128 @@ export default function Dashboard() {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    setMessage("");
-    setError("");
-
+    setMessage(""); setError(""); setLoading(true);
     const formData = new FormData();
     formData.append("file1", file1);
     formData.append("file2", file2);
-
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/files/upload?user_name=${userName}&user_id=${userId}`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        formData, { headers: { "Content-Type": "multipart/form-data" } }
       );
-      setMessage("✅ Files uploaded successfully!");
+      setMessage("Files uploaded successfully!");
     } catch (err) {
       setError(err.response?.data?.detail || "Upload failed");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleDownload = () => {
-    window.open(`${import.meta.env.VITE_API_URL}/files/download-sample`, "_blank");
-  };
-
   const handleLogout = () => {
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("user_id");
+    localStorage.clear();
     navigate("/login");
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-lg mx-auto">
+    <div style={{minHeight:"100vh", background:"#f5f5f5", fontFamily:"'Segoe UI', Arial, sans-serif"}}>
 
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">
-            Welcome, <span className="text-blue-600">{userName}</span>! 👋
-          </h2>
+      {/* Navbar */}
+      <div style={{background:"white", borderBottom:"3px solid #a100ff", padding:"0 40px", display:"flex", alignItems:"center", justifyContent:"space-between", height:"64px", boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
+        <div style={{fontSize:"24px", fontWeight:"800", color:"#a100ff", letterSpacing:"-1px"}}>
+          accenture
+        </div>
+        <div style={{display:"flex", alignItems:"center", gap:"20px"}}>
+          <span style={{fontSize:"14px", color:"#333", fontWeight:"500"}}>
+            👤 {userName}
+          </span>
           <button onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-sm">
-            Logout
+            style={{padding:"8px 20px", background:"#a100ff", color:"white", border:"none", borderRadius:"4px", fontSize:"13px", fontWeight:"600", cursor:"pointer"}}>
+            Sign Out
           </button>
         </div>
+      </div>
 
-        {/* Upload Section */}
-        <div className="bg-white p-6 rounded shadow mb-4">
-          <h3 className="text-lg font-semibold mb-4 text-gray-700">📤 Upload Files</h3>
-          {message && <p className="text-green-600 text-sm mb-2">{message}</p>}
-          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-          <form onSubmit={handleUpload} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">
-                File 1 (PDF / PNG / JPEG only)
-              </label>
-              <input type="file" accept=".pdf,.png,.jpg,.jpeg"
-                onChange={e => setFile1(e.target.files[0])} required
-                className="w-full border p-2 rounded text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">
-                File 2 (PDF / PNG / JPEG only)
-              </label>
-              <input type="file" accept=".pdf,.png,.jpg,.jpeg"
-                onChange={e => setFile2(e.target.files[0])} required
-                className="w-full border p-2 rounded text-sm" />
-            </div>
-            <button type="submit"
-              className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 font-semibold">
-              Upload Files
-            </button>
-          </form>
+      {/* Content */}
+      <div style={{maxWidth:"900px", margin:"40px auto", padding:"0 24px"}}>
+
+        {/* Welcome Banner */}
+        <div style={{background:"white", borderLeft:"4px solid #a100ff", padding:"24px 28px", borderRadius:"4px", marginBottom:"28px", boxShadow:"0 1px 4px rgba(0,0,0,0.06)"}}>
+          <h2 style={{fontSize:"20px", fontWeight:"700", color:"#1a1a1a", margin:"0 0 4px 0"}}>
+            Welcome, {userName}
+          </h2>
+          <p style={{color:"#666", fontSize:"14px", margin:0}}>
+            Manage your files and documents from this dashboard.
+          </p>
         </div>
 
-        {/* Download Section */}
-        <div className="bg-white p-6 rounded shadow">
-          <h3 className="text-lg font-semibold mb-4 text-gray-700">📥 Download Sample File</h3>
-          <button onClick={handleDownload}
-            className="w-full bg-gray-700 text-white p-2 rounded hover:bg-gray-800 font-semibold">
-            ⬇️ Download Sample File
-          </button>
-        </div>
+        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"24px"}}>
 
+          {/* Upload Section */}
+          <div style={{background:"white", borderRadius:"4px", padding:"28px", boxShadow:"0 1px 4px rgba(0,0,0,0.06)"}}>
+            <div style={{display:"flex", alignItems:"center", gap:"10px", marginBottom:"20px", borderBottom:"2px solid #f0f0f0", paddingBottom:"16px"}}>
+              <div style={{width:"4px", height:"20px", background:"#a100ff", borderRadius:"2px"}}></div>
+              <h3 style={{fontSize:"16px", fontWeight:"700", color:"#1a1a1a", margin:0}}>Upload Files</h3>
+            </div>
+
+            {message && (
+              <div style={{background:"#f0fff4", border:"1px solid #b7ebc0", color:"#276749", padding:"10px 14px", borderRadius:"4px", fontSize:"13px", marginBottom:"16px"}}>
+                ✓ {message}
+              </div>
+            )}
+            {error && (
+              <div style={{background:"#fff0f0", border:"1px solid #ffcccc", color:"#cc0000", padding:"10px 14px", borderRadius:"4px", fontSize:"13px", marginBottom:"16px"}}>
+                ✗ {error}
+              </div>
+            )}
+
+            <form onSubmit={handleUpload}>
+              <div style={{marginBottom:"16px"}}>
+                <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                  Document 1
+                </label>
+                <input type="file" accept=".pdf,.png,.jpg,.jpeg" required
+                  onChange={e => setFile1(e.target.files[0])}
+                  style={{width:"100%", padding:"8px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"13px", boxSizing:"border-box"}} />
+                <p style={{fontSize:"11px", color:"#999", margin:"4px 0 0"}}>PDF, PNG, JPEG only</p>
+              </div>
+
+              <div style={{marginBottom:"20px"}}>
+                <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                  Document 2
+                </label>
+                <input type="file" accept=".pdf,.png,.jpg,.jpeg" required
+                  onChange={e => setFile2(e.target.files[0])}
+                  style={{width:"100%", padding:"8px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"13px", boxSizing:"border-box"}} />
+                <p style={{fontSize:"11px", color:"#999", margin:"4px 0 0"}}>PDF, PNG, JPEG only</p>
+              </div>
+
+              <button type="submit" disabled={loading}
+                style={{width:"100%", padding:"11px", background: loading ? "#ccc" : "#a100ff", color:"white", border:"none", borderRadius:"4px", fontSize:"14px", fontWeight:"700", cursor: loading ? "not-allowed" : "pointer"}}>
+                {loading ? "Uploading..." : "Upload Files"}
+              </button>
+            </form>
+          </div>
+
+          {/* Download Section */}
+          <div style={{background:"white", borderRadius:"4px", padding:"28px", boxShadow:"0 1px 4px rgba(0,0,0,0.06)"}}>
+            <div style={{display:"flex", alignItems:"center", gap:"10px", marginBottom:"20px", borderBottom:"2px solid #f0f0f0", paddingBottom:"16px"}}>
+              <div style={{width:"4px", height:"20px", background:"#a100ff", borderRadius:"2px"}}></div>
+              <h3 style={{fontSize:"16px", fontWeight:"700", color:"#1a1a1a", margin:0}}>Downloads</h3>
+            </div>
+
+            <div style={{background:"#f9f9f9", border:"1px solid #eee", borderRadius:"4px", padding:"20px", marginBottom:"16px"}}>
+              <div style={{fontSize:"32px", marginBottom:"8px"}}>📄</div>
+              <p style={{fontSize:"14px", fontWeight:"600", color:"#333", margin:"0 0 4px"}}>Sample Document</p>
+              <p style={{fontSize:"12px", color:"#999", margin:"0 0 16px"}}>Click below to download the sample file</p>
+              <button
+                onClick={() => window.open(`${import.meta.env.VITE_API_URL}/files/download-sample`, "_blank")}
+                style={{width:"100%", padding:"11px", background:"white", color:"#a100ff", border:"2px solid #a100ff", borderRadius:"4px", fontSize:"14px", fontWeight:"700", cursor:"pointer"}}>
+                Download Sample
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );

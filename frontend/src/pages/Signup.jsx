@@ -28,73 +28,111 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md mx-4 border border-gray-100">
-
-        <div className="text-center mb-2">
-          <h2 className="text-3xl font-bold text-gray-800">Sign Up</h2>
-          <p className="text-gray-400 text-sm mt-1">Create your account</p>
+    <div style={{minHeight:"100vh", display:"flex", fontFamily:"'Segoe UI', Arial, sans-serif", background:"#f5f5f5"}}>
+      
+      {/* Left Panel */}
+      <div style={{width:"420px", background:"#a100ff", display:"flex", flexDirection:"column", justifyContent:"center", padding:"60px 48px", color:"white"}}>
+        <div style={{fontSize:"32px", fontWeight:"800", letterSpacing:"-1px", marginBottom:"8px"}}>
+          accenture
         </div>
-
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg p-3 text-sm mb-4 text-center">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4 mt-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-            <input type="text" placeholder="John Doe"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onChange={e => setForm({...form, name: e.target.value})} required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-            <input type="number" placeholder="25"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onChange={e => setForm({...form, age: e.target.value})} required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-            <input type="text" placeholder="123 Main St, City"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onChange={e => setForm({...form, address: e.target.value})} required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" placeholder="john@example.com"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onChange={e => setForm({...form, email: e.target.value})} required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-            <input type="tel" placeholder="9876543210"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onChange={e => setForm({...form, mobile: e.target.value})} required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input type="password" placeholder="••••••••"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onChange={e => setForm({...form, password: e.target.value})} required />
-          </div>
-
-          <button type="submit" disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2.5 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 mt-4 shadow-md">
-            {loading ? "Creating Account..." : "Sign Up"}
-          </button>
-        </form>
-
-        <p className="text-center text-sm text-gray-500 mt-4">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-600 font-semibold hover:underline">Login</a>
+        <div style={{width:"40px", height:"3px", background:"white", marginBottom:"32px"}}></div>
+        <h2 style={{fontSize:"28px", fontWeight:"700", marginBottom:"16px", lineHeight:"1.3"}}>
+          Create your account
+        </h2>
+        <p style={{fontSize:"15px", opacity:"0.85", lineHeight:"1.7"}}>
+          Join our platform to access powerful tools and resources designed for your success.
         </p>
+        <div style={{marginTop:"48px", borderTop:"1px solid rgba(255,255,255,0.2)", paddingTop:"24px"}}>
+          <p style={{fontSize:"13px", opacity:"0.7"}}>Already have an account?</p>
+          <a href="/login" style={{color:"white", fontWeight:"600", fontSize:"14px", textDecoration:"none", borderBottom:"1px solid white"}}>
+            Sign in here →
+          </a>
+        </div>
+      </div>
+
+      {/* Right Panel */}
+      <div style={{flex:1, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px"}}>
+        <div style={{width:"100%", maxWidth:"480px"}}>
+          
+          <h3 style={{fontSize:"22px", fontWeight:"700", color:"#1a1a1a", marginBottom:"4px"}}>
+            Register
+          </h3>
+          <p style={{color:"#666", fontSize:"14px", marginBottom:"32px"}}>
+            Fill in your details to get started
+          </p>
+
+          {error && (
+            <div style={{background:"#fff0f0", border:"1px solid #ffcccc", color:"#cc0000", padding:"12px 16px", borderRadius:"4px", fontSize:"14px", marginBottom:"20px"}}>
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"16px", marginBottom:"16px"}}>
+              <div>
+                <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                  Full Name *
+                </label>
+                <input type="text" placeholder="John Doe" required
+                  style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                  onChange={e => setForm({...form, name: e.target.value})} />
+              </div>
+              <div>
+                <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                  Age *
+                </label>
+                <input type="number" placeholder="25" required
+                  style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                  onChange={e => setForm({...form, age: e.target.value})} />
+              </div>
+            </div>
+
+            <div style={{marginBottom:"16px"}}>
+              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                Address *
+              </label>
+              <input type="text" placeholder="123 Main Street, City" required
+                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                onChange={e => setForm({...form, address: e.target.value})} />
+            </div>
+
+            <div style={{marginBottom:"16px"}}>
+              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                Email Address *
+              </label>
+              <input type="email" placeholder="john@example.com" required
+                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                onChange={e => setForm({...form, email: e.target.value})} />
+            </div>
+
+            <div style={{marginBottom:"16px"}}>
+              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                Mobile Number *
+              </label>
+              <input type="tel" placeholder="9876543210" required
+                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                onChange={e => setForm({...form, mobile: e.target.value})} />
+            </div>
+
+            <div style={{marginBottom:"24px"}}>
+              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
+                Password *
+              </label>
+              <input type="password" placeholder="••••••••" required
+                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                onChange={e => setForm({...form, password: e.target.value})} />
+            </div>
+
+            <button type="submit" disabled={loading}
+              style={{width:"100%", padding:"12px", background: loading ? "#ccc" : "#a100ff", color:"white", border:"none", borderRadius:"4px", fontSize:"15px", fontWeight:"700", cursor: loading ? "not-allowed" : "pointer", letterSpacing:"0.5px"}}>
+              {loading ? "Creating Account..." : "Create Account"}
+            </button>
+          </form>
+
+          <p style={{textAlign:"center", fontSize:"12px", color:"#999", marginTop:"24px"}}>
+            © 2024 Accenture. All rights reserved.
+          </p>
+        </div>
       </div>
     </div>
   );
