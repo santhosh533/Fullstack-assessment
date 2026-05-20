@@ -15,18 +15,36 @@ export default function Dashboard() {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    setMessage(""); setError(""); setLoading(true);
+    setMessage("");
+    setError("");
+    setLoading(true);
+
+    if (!file1 || !file2) {
+      setError("Please select both files!");
+      setLoading(false);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file1", file1);
     formData.append("file2", file2);
+
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/files/upload?user_name=${userName}&user_id=${userId}`,
-        formData, { headers: { "Content-Type": "multipart/form-data" } }
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
       setMessage("Files uploaded successfully!");
     } catch (err) {
-      setError(err.response?.data?.detail || "Upload failed");
+      const detail = err.response?.data?.detail;
+      if (typeof detail === "string") {
+        setError(detail);
+      } else if (Array.isArray(detail)) {
+        setError(detail.map(d => d.msg).join(", "));
+      } else {
+        setError("Upload failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
