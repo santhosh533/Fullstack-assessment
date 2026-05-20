@@ -32,7 +32,7 @@ export default function Signup() {
 
       {/* Top Navbar */}
       <div style={{background:"white", borderBottom:"3px solid #a100ff", padding:"0 40px", height:"60px", display:"flex", alignItems:"center", boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-        <span style={{fontSize:"26px", fontWeight:"800", color:"#a100ff", letterSpacing:"-1px"}}>accenture</span>
+        <span style={{fontSize:"26px", fontWeight:"800", color:"#a100ff", letterSpacing:"-1px"}}>SoftMania</span>
       </div>
 
       {/* Center Content */}
