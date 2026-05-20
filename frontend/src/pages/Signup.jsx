@@ -28,108 +28,78 @@ export default function Signup() {
   };
 
   return (
-    <div style={{minHeight:"100vh", display:"flex", fontFamily:"'Segoe UI', Arial, sans-serif", background:"#f5f5f5"}}>
-      
-      {/* Left Panel */}
-      <div style={{width:"420px", background:"#a100ff", display:"flex", flexDirection:"column", justifyContent:"center", padding:"60px 48px", color:"white"}}>
-        <div style={{fontSize:"32px", fontWeight:"800", letterSpacing:"-1px", marginBottom:"8px"}}>
-          accenture
-        </div>
-        <div style={{width:"40px", height:"3px", background:"white", marginBottom:"32px"}}></div>
-        <h2 style={{fontSize:"28px", fontWeight:"700", marginBottom:"16px", lineHeight:"1.3"}}>
-          Create your account
-        </h2>
-        <p style={{fontSize:"15px", opacity:"0.85", lineHeight:"1.7"}}>
-          Join our platform to access powerful tools and resources designed for your success.
-        </p>
-        <div style={{marginTop:"48px", borderTop:"1px solid rgba(255,255,255,0.2)", paddingTop:"24px"}}>
-          <p style={{fontSize:"13px", opacity:"0.7"}}>Already have an account?</p>
-          <a href="/login" style={{color:"white", fontWeight:"600", fontSize:"14px", textDecoration:"none", borderBottom:"1px solid white"}}>
-            Sign in here →
-          </a>
-        </div>
+    <div style={{minHeight:"100vh", background:"#f5f5f5", fontFamily:"'Segoe UI', Arial, sans-serif", display:"flex", flexDirection:"column"}}>
+
+      {/* Top Navbar */}
+      <div style={{background:"white", borderBottom:"3px solid #a100ff", padding:"0 40px", height:"60px", display:"flex", alignItems:"center", boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
+        <span style={{fontSize:"26px", fontWeight:"800", color:"#a100ff", letterSpacing:"-1px"}}>accenture</span>
       </div>
 
-      {/* Right Panel */}
-      <div style={{flex:1, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px"}}>
-        <div style={{width:"100%", maxWidth:"480px"}}>
-          
-          <h3 style={{fontSize:"22px", fontWeight:"700", color:"#1a1a1a", marginBottom:"4px"}}>
-            Register
-          </h3>
-          <p style={{color:"#666", fontSize:"14px", marginBottom:"32px"}}>
-            Fill in your details to get started
-          </p>
+      {/* Center Content */}
+      <div style={{flex:1, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px 20px"}}>
+        <div style={{background:"white", borderRadius:"6px", boxShadow:"0 2px 12px rgba(0,0,0,0.08)", padding:"40px", width:"100%", maxWidth:"520px"}}>
+
+          <div style={{borderLeft:"4px solid #a100ff", paddingLeft:"16px", marginBottom:"28px"}}>
+            <h2 style={{fontSize:"22px", fontWeight:"700", color:"#1a1a1a", margin:"0 0 4px"}}>Create Account</h2>
+            <p style={{fontSize:"13px", color:"#888", margin:0}}>Fill in your details to register</p>
+          </div>
 
           {error && (
-            <div style={{background:"#fff0f0", border:"1px solid #ffcccc", color:"#cc0000", padding:"12px 16px", borderRadius:"4px", fontSize:"14px", marginBottom:"20px"}}>
-              {error}
+            <div style={{background:"#fff0f0", border:"1px solid #ffcccc", color:"#cc0000", padding:"12px 16px", borderRadius:"4px", fontSize:"13px", marginBottom:"20px"}}>
+              ✗ {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit}>
             <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"16px", marginBottom:"16px"}}>
               <div>
-                <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
-                  Full Name *
-                </label>
+                <label style={{display:"block", fontSize:"12px", fontWeight:"600", color:"#555", marginBottom:"6px", textTransform:"uppercase", letterSpacing:"0.5px"}}>Full Name *</label>
                 <input type="text" placeholder="John Doe" required
-                  style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                  style={{width:"100%", padding:"10px 12px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box", transition:"border 0.2s"}}
+                  onFocus={e => e.target.style.border="1px solid #a100ff"}
+                  onBlur={e => e.target.style.border="1px solid #ddd"}
                   onChange={e => setForm({...form, name: e.target.value})} />
               </div>
               <div>
-                <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
-                  Age *
-                </label>
+                <label style={{display:"block", fontSize:"12px", fontWeight:"600", color:"#555", marginBottom:"6px", textTransform:"uppercase", letterSpacing:"0.5px"}}>Age *</label>
                 <input type="number" placeholder="25" required
-                  style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                  style={{width:"100%", padding:"10px 12px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                  onFocus={e => e.target.style.border="1px solid #a100ff"}
+                  onBlur={e => e.target.style.border="1px solid #ddd"}
                   onChange={e => setForm({...form, age: e.target.value})} />
               </div>
             </div>
 
-            <div style={{marginBottom:"16px"}}>
-              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
-                Address *
-              </label>
-              <input type="text" placeholder="123 Main Street, City" required
-                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
-                onChange={e => setForm({...form, address: e.target.value})} />
-            </div>
-
-            <div style={{marginBottom:"16px"}}>
-              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
-                Email Address *
-              </label>
-              <input type="email" placeholder="john@example.com" required
-                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
-                onChange={e => setForm({...form, email: e.target.value})} />
-            </div>
-
-            <div style={{marginBottom:"16px"}}>
-              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
-                Mobile Number *
-              </label>
-              <input type="tel" placeholder="9876543210" required
-                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
-                onChange={e => setForm({...form, mobile: e.target.value})} />
-            </div>
-
-            <div style={{marginBottom:"24px"}}>
-              <label style={{display:"block", fontSize:"13px", fontWeight:"600", color:"#333", marginBottom:"6px"}}>
-                Password *
-              </label>
-              <input type="password" placeholder="••••••••" required
-                style={{width:"100%", padding:"10px 14px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
-                onChange={e => setForm({...form, password: e.target.value})} />
-            </div>
+            {[
+              {label:"Address", key:"address", type:"text", placeholder:"123 Main St, City"},
+              {label:"Email Address", key:"email", type:"email", placeholder:"john@example.com"},
+              {label:"Mobile Number", key:"mobile", type:"tel", placeholder:"9876543210"},
+              {label:"Password", key:"password", type:"password", placeholder:"••••••••"},
+            ].map(field => (
+              <div key={field.key} style={{marginBottom:"16px"}}>
+                <label style={{display:"block", fontSize:"12px", fontWeight:"600", color:"#555", marginBottom:"6px", textTransform:"uppercase", letterSpacing:"0.5px"}}>
+                  {field.label} *
+                </label>
+                <input type={field.type} placeholder={field.placeholder} required
+                  style={{width:"100%", padding:"10px 12px", border:"1px solid #ddd", borderRadius:"4px", fontSize:"14px", outline:"none", boxSizing:"border-box"}}
+                  onFocus={e => e.target.style.border="1px solid #a100ff"}
+                  onBlur={e => e.target.style.border="1px solid #ddd"}
+                  onChange={e => setForm({...form, [field.key]: e.target.value})} />
+              </div>
+            ))}
 
             <button type="submit" disabled={loading}
-              style={{width:"100%", padding:"12px", background: loading ? "#ccc" : "#a100ff", color:"white", border:"none", borderRadius:"4px", fontSize:"15px", fontWeight:"700", cursor: loading ? "not-allowed" : "pointer", letterSpacing:"0.5px"}}>
+              style={{width:"100%", padding:"12px", background: loading ? "#ccc" : "#a100ff", color:"white", border:"none", borderRadius:"4px", fontSize:"14px", fontWeight:"700", cursor: loading ? "not-allowed" : "pointer", marginTop:"8px", letterSpacing:"0.5px"}}>
               {loading ? "Creating Account..." : "Create Account"}
             </button>
           </form>
 
-          <p style={{textAlign:"center", fontSize:"12px", color:"#999", marginTop:"24px"}}>
+          <p style={{textAlign:"center", fontSize:"13px", color:"#666", marginTop:"20px"}}>
+            Already have an account?{" "}
+            <a href="/login" style={{color:"#a100ff", fontWeight:"600", textDecoration:"none"}}>Sign in</a>
+          </p>
+
+          <p style={{textAlign:"center", fontSize:"11px", color:"#bbb", marginTop:"24px"}}>
             © 2024 Accenture. All rights reserved.
           </p>
         </div>
