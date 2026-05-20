@@ -18,4 +18,5 @@ class UploadedFile(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     filename = Column(String(255), nullable=False)
     file_type = Column(String(50), nullable=False)
+    file_url = Column(String(500), nullable=True)
     upload_timestamp = Column(DateTime, server_default=func.now())
