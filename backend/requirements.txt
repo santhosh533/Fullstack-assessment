@@ -10,3 +10,4 @@ bcrypt==5.0.0
 email-validator==2.3.0
 dnspython==2.8.0
 typing_extensions==4.15.0
+cloudinary
