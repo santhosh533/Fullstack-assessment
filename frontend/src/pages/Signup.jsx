@@ -100,7 +100,7 @@ export default function Signup() {
           </p>
 
           <p style={{textAlign:"center", fontSize:"11px", color:"#bbb", marginTop:"24px"}}>
-            © 2024 Accenture. All rights reserved.
+            © 2024 SoftMania. All rights reserved.
           </p>
         </div>
       </div>

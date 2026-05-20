@@ -43,7 +43,7 @@ export default function Dashboard() {
       {/* Navbar */}
       <div style={{background:"white", borderBottom:"3px solid #a100ff", padding:"0 40px", display:"flex", alignItems:"center", justifyContent:"space-between", height:"64px", boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
         <div style={{fontSize:"24px", fontWeight:"800", color:"#a100ff", letterSpacing:"-1px"}}>
-          accenture
+          SoftMania
         </div>
         <div style={{display:"flex", alignItems:"center", gap:"20px"}}>
           <span style={{fontSize:"14px", color:"#333", fontWeight:"500"}}>
